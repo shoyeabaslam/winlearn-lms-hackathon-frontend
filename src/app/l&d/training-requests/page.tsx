@@ -105,14 +105,10 @@ const TrainingRequests = () => {
         };
 
         // Only update if the redux requests array length differs from local state
-        if (requests.length > 0 && requests.length !== trainingRequests.length) {
-            setTrainingRequests(requests);
-        } else if (requests.length === 0) {
-            fetchRequests();
-        }
+        fetchRequests();
         // We omit trainingRequests from dependencies to prevent extra updates.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [requests, dispatch]);
+    }, [dispatch]);
 
     const filterRequestsByTabs = (tab: string) => {
         return filteredRequests.filter((request: any) => {

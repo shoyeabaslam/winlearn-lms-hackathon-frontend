@@ -15,8 +15,7 @@ const menuItems: MenuItem[] = [
   { name: 'Dashboard', route: '/employee', icon: <Home size={24} /> },
   { name: 'Learnings & Events', route: '/employee/learnings', icon: <Book size={24} /> },
   { name: 'New Request', route: '/employee/new-request', icon: <FileText size={24} /> },
-  { name: 'Certificates', route: '/employee/certificates', icon: <Clipboard size={24} /> },
-  { name: 'KRA’s & Goals', route: '/employee/kras-goals', icon: <Clipboard size={24} /> },
+  { name: 'KRA’s & Goals', route: 'https://winpr.azurewebsites.net/MyGoals', icon: <Clipboard size={24} />, target: "_blank" },
 ];
 
 export default function EmployeeLayout({

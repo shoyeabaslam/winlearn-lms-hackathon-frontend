@@ -30,8 +30,7 @@ import {
     XCircle,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "@/redux/app/hooks";
-import { addRequests, Requests } from "@/redux/features/lndDataSlice";
+import { useAppDispatch } from "@/redux/app/hooks";
 import { TrainingMode } from "@/lib/trainingMode";
 
 ChartJS.register(
@@ -133,7 +132,6 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [selectedRequest, setSelectedRequest] = useState<Request | null>(null);
-    const { requests: reduxSavedRequests } = useAppSelector((state) => state.lndDataSlice);
     const dispatch = useAppDispatch()
     useEffect(() => {
         const fetchRequests = async () => {
@@ -148,7 +146,6 @@ const Dashboard = () => {
                             new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime()
                     );
                     setRequests(sortedRequests);
-                    dispatch(addRequests(sortedRequests as Requests[]));
                 }
             } catch (err) {
                 setError("Failed to fetch training data");
@@ -157,13 +154,8 @@ const Dashboard = () => {
                 setLoading(false);
             }
         };
-        if (reduxSavedRequests.length > 0) {
-            setRequests(reduxSavedRequests as Requests[]);
-        }
-        else {
-            fetchRequests();
-        }
-    }, [dispatch, requests]);
+        fetchRequests();
+    }, [dispatch]);
 
     // Updated KPI calculations based on the new statuses
     const completedCount = requests.filter((r) => r.status === "Completed").length;
@@ -192,7 +184,6 @@ const Dashboard = () => {
         }
         return acc;
     }, {} as Record<string, number>);
-    console.log("Training Mode Distribution:", trainingModeDistribution);
     const trainingModeLabels = Object.keys(trainingModeDistribution);
     const trainingModeData = Object.values(trainingModeDistribution);
 

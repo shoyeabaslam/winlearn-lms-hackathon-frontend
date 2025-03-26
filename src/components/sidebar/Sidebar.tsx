@@ -4,15 +4,11 @@ import React from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { MenuItem } from '@/types/MenuItem';
 import { LogOut } from 'lucide-react';
+import Link from 'next/link';
 
 const Sidebar = ({ children, menuItems }: { children: React.ReactNode, menuItems: MenuItem[] }) => {
     const router = useRouter();
     const pathname = usePathname(); // ✅ current path
-
-    const handleClick = (route: string) => {
-        router.push(route);
-    };
-
     const handleLogout = () => {
         document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         sessionStorage.clear();
@@ -33,8 +29,9 @@ const Sidebar = ({ children, menuItems }: { children: React.ReactNode, menuItems
                         const isActive = pathname === item.route; // ✅ current route match
                         return (
                             <li key={item.name} className="group">
-                                <button
-                                    onClick={() => handleClick(item.route)}
+                                <Link
+                                    href={item.route}
+                                    target={item.target ? item.target : "_self"}
                                     className={`
                                         flex w-full items-center space-x-3 text-sm p-2 rounded-md transition-colors duration-300
                                         ${isActive
@@ -45,7 +42,7 @@ const Sidebar = ({ children, menuItems }: { children: React.ReactNode, menuItems
                                 >
                                     <span className="text-2xl">{item.icon}</span>
                                     <span>{item.name}</span>
-                                </button>
+                                </Link>
                             </li>
                         );
                     })}
