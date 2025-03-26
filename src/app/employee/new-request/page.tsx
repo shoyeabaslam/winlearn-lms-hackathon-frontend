@@ -212,6 +212,7 @@ const TrainingRequestForm = () => {
                     agenda: formData.brownBagDescription,
                     speakerDescription: formData.brownBagSpeakerWriteUp,
                     requestDate: new Date().toISOString(),
+                    status: Status.Pending
                 };
 
                 // Send Brown Bag session request
