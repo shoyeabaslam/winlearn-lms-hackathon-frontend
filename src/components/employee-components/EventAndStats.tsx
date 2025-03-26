@@ -17,31 +17,17 @@ import { Status } from '@/types/Status';
 const events = [
     {
         id: 1,
-        title: "Event 1",
-        startDate: "March 1, 2025",
-        endDate: "March 31, 2025",
-        registerUrl: "/path/to/event1.jpg",
+        title: "Fire Side Chats",
+        startDate: "",
+        endDate: "",
+        registerUrl: "https://www.winwire.com/purpose-driven-innovation/",
     },
     {
         id: 2,
-        title: "Event 2",
-        startDate: "April 5, 2025",
-        endDate: "April 20, 2025",
-        registerUrl: "/path/to/event2.jpg",
-    },
-    {
-        id: 3,
-        title: "Event 3",
-        startDate: "May 10, 2025",
-        endDate: "May 20, 2025",
-        registerUrl: "/path/to/event3.jpg",
-    },
-    {
-        id: 4,
-        title: "Event 4",
-        startDate: "June 1, 2025",
-        endDate: "June 15, 2025",
-        registerUrl: "/path/to/event4.jpg",
+        title: "CTO Tech Talks",
+        startDate: "",
+        endDate: "",
+        registerUrl: "https://www.winwire.com/cto-tech-talk/",
     },
 ];
 
@@ -87,9 +73,8 @@ const EventAndStats = () => {
                             <div key={index} className='flex space-x-2 shadow-lg border rounded-lg p-2'>
                                 <div className='flex-1 flex space-x-2 px-2'>
                                     <Image src={event} width={500} height={500} alt='event' className='w-[40px] h-[40px] cursor-pointer' />
-                                    <div>
+                                    <div className='h-full text-center w-full flex justify-start items-center'>
                                         <p className='font-semibold text-md truncate'>{e.title}</p>
-                                        <p className='font-normal text-xs'>{`${e.startDate} - ${e.endDate}`}</p>
                                     </div>
                                 </div>
                                 <div className='flex flex-col justify-center items-center space-y-2'>

@@ -121,11 +121,13 @@ const Page: FC = () => {
                                 </span>
                             </h2>
 
-                            {loading ? <CardSkimmer /> : coursesToDisplay.length > 0 && coursesToDisplay.map((course, key) => (
-                                <div className='grid grid-cols-2 gap-4' key={key}>
-                                    <CourseProgressCard data={course} />
+                            {loading ? <CardSkimmer /> :
+                                <div className='grid grid-cols-2 gap-4'>
+                                    {coursesToDisplay.length > 0 && coursesToDisplay.map((course, key) => (
+                                        <CourseProgressCard data={course} key={key} />
+                                    ))}
                                 </div>
-                            ))}
+                            }
 
                         </>
                     )

@@ -103,7 +103,7 @@ export default function LoginPage() {
                   <Input
                     id="email"
                     type="email"
-                    placeholder={userType === 'admin' ? 'admin@company.com' : 'you@company.com'}
+                    placeholder={userType === 'admin' ? 'admin@winwire.com' : 'you@winwire.com'}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="h-11 text-base focus:ring-2 focus:ring-primary focus:outline-none transition"

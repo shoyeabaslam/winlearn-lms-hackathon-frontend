@@ -282,19 +282,19 @@ const TrainingRequestForm = () => {
                     <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                         <div>
                             <Label>Employee ID *</Label>
-                            <p className="text-gray-700 border border-gray-400 rounded-sm p-2">{formData.employeeId || "N/A"}</p>
+                            <p className="text-gray-700 border border-gray-100 rounded-sm p-2">{formData.employeeId || "N/A"}</p>
                         </div>
                         <div>
                             <Label>Employee Name </Label>
-                            <p className="text-gray-700 border border-gray-400 rounded-sm p-2">{formData.name || "N/A"}</p>
+                            <p className="text-gray-700 border border-gray-100 rounded-sm p-2">{formData.name || "N/A"}</p>
                         </div>
                         <div>
                             <Label>Designation</Label>
-                            <p className="text-gray-700 border border-gray-400 rounded-sm p-2">{formData.employeeRole || "N/A"}</p>
+                            <p className="text-gray-700 border border-gray-100 rounded-sm p-2">{formData.employeeRole || "N/A"}</p>
                         </div>
                         <div>
                             <Label>Tech Group</Label>
-                            <p className="text-gray-700 border border-gray-400 rounded-sm p-2">{formData.techGroup || "N/A"}</p>
+                            <p className="text-gray-700 border border-gray-100 rounded-sm p-2">{formData.techGroup || "N/A"}</p>
                         </div>
                     </CardContent>
                 </Card>
@@ -312,7 +312,7 @@ const TrainingRequestForm = () => {
                                 value="training"
                                 checked={formData.requestType === 'training'}
                                 onChange={e => handleChange('requestType', e.target.value)}
-                                className="h-4 w-4"
+                                className="h-4 w-4 cursor-pointer"
                             />
                             <span>Training Request</span>
                         </div>
@@ -323,7 +323,7 @@ const TrainingRequestForm = () => {
                                 value="brownBag"
                                 checked={formData.requestType === 'brownBag'}
                                 onChange={e => handleChange('requestType', e.target.value)}
-                                className="h-4 w-4"
+                                className="h-4 w-4 cursor-pointer"
                             />
                             <span>Brown Bag Session</span>
                         </div>
