@@ -1,1 +1,1 @@
-export const TrainingMode = ["LIVE - Virtual Training", "LIVE - Classroom training", "Online Self Learning"]
+export const TrainingMode = ["LIVE - Virtual Training", "LIVE - Classroom training", "Self Learning"]

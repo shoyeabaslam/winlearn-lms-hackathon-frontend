@@ -65,73 +65,75 @@ export const CourseProgressCard = ({ data, setVideoItems }: { data: any, setVide
   }
 
   return (
-    <div className="group relative p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 hover:border-blue-200">
-      {/* Status Badge */}
-      <div className="absolute top-4 right-4">
-        <div className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${status === "Completed" ? "bg-green-50 text-green-700" :
-          status === Status.Started ? "bg-orange-50 text-orange-700" :
-            "bg-rose-50 text-rose-700"
-          }`}>
-          {status === Status.Started && <Clock className="h-3 w-3" />}
-          {status === "Completed" && <Award className="h-3 w-3" />}
-          {status}
-        </div>
-      </div>
-
-      {/* Course Header */}
-      <div className="flex flex-col space-y-3 mb-4">
-        <div className="flex items-start justify-between">
-          <h3 className="text-lg font-semibold text-gray-900 leading-tight">
-            {courseDetails.title}
-          </h3>
-        </div>
-
-      </div>
-
-      {/* Course Description */}
-      <p className="text-gray-600 text-sm mb-5 line-clamp-2">
-        {courseDetails.description}
-      </p>
-
-      {/* Metadata Grid */}
-      <div className="grid grid-cols-2 gap-4 mb-5">
-        <div className="flex items-start space-x-3">
-          <div className="bg-blue-50 p-2 rounded-lg">
-            <CalendarDays className="h-4 w-4 text-blue-600" />
-          </div>
-          <div>
-            <p className="text-xs text-gray-500">Duration</p>
-            <p className="text-sm font-medium">
-              {courseDetails.durationInWeeks} weeks • {courseDetails.durationInHours} hrs
-            </p>
+    <div className="group h-[300px] flex flex-col relative p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 hover:border-blue-200">
+      <div className='flex-1'>
+        {/* Status Badge */}
+        <div className="absolute top-1 right-1">
+          <div className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${status === "Completed" ? "bg-green-50 text-green-700" :
+            status === Status.Started ? "bg-orange-50 text-orange-700" :
+              "bg-rose-50 text-rose-700"
+            }`}>
+            {status === Status.Started && <Clock className="h-3 w-3" />}
+            {status === "Completed" && <Award className="h-3 w-3" />}
+            {status}
           </div>
         </div>
-        <div className="flex items-start space-x-3">
-          <div className="bg-purple-50 p-2 rounded-lg">
-            <Shield className="h-4 w-4 text-purple-600" />
+
+        {/* Course Header */}
+        <div className="flex flex-col space-y-3 mb-4">
+          <div className="flex items-start justify-between">
+            <h3 className="text-lg font-semibold text-gray-900 leading-tight">
+              {courseDetails.title}
+            </h3>
           </div>
-          <div>
-            <p className="text-xs text-gray-500">Category</p>
-            <p className="text-sm font-medium">{courseDetails.category}</p>
+
+        </div>
+
+        {/* Course Description */}
+        <p className="text-gray-600 text-sm mb-5 line-clamp-2">
+          {courseDetails.description}
+        </p>
+
+        {/* Metadata Grid */}
+        <div className="grid grid-cols-2 gap-4 mb-5">
+          <div className="flex items-start space-x-3">
+            <div className="bg-blue-50 p-2 rounded-lg">
+              <CalendarDays className="h-4 w-4 text-blue-600" />
+            </div>
+            <div>
+              <p className="text-xs text-gray-500">Duration</p>
+              <p className="text-sm font-medium">
+                {courseDetails.durationInWeeks} weeks • {courseDetails.durationInHours} hrs
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start space-x-3">
+            <div className="bg-purple-50 p-2 rounded-lg">
+              <Shield className="h-4 w-4 text-purple-600" />
+            </div>
+            <div>
+              <p className="text-xs text-gray-500">Category</p>
+              <p className="text-sm font-medium">{courseDetails.category}</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Points and Skills */}
-      <div className="flex items-center justify-between mb-5">
-        <div className="flex items-center space-x-2 bg-blue-50 px-3 py-1 rounded-full">
-          <Trophy className="h-4 w-4 text-blue-600" />
-          <span className="text-xs font-medium text-blue-700">
-            {courseDetails.points} Learning Points
-          </span>
+        {/* Points and Skills */}
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center space-x-2 bg-blue-50 px-3 py-1 rounded-full">
+            <Trophy className="h-4 w-4 text-blue-600" />
+            <span className="text-xs font-medium text-blue-700">
+              {courseDetails.points} Learning Points
+            </span>
+          </div>
+
+          <div className="text-xs text-gray-500 flex items-center">
+            <BookOpen className="h-3 w-3 mr-1" />
+            {courseDetails.trainingMode}
+          </div>
         </div>
 
-        <div className="text-xs text-gray-500 flex items-center">
-          <BookOpen className="h-3 w-3 mr-1" />
-          {courseDetails.trainingMode}
-        </div>
       </div>
-
 
       {/* Action Buttons */}
       <div className="flex space-x-3">
