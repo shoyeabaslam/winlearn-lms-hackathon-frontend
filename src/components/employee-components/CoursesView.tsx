@@ -183,8 +183,9 @@ const CoursesView = ({ selectedCategory }: { selectedCategory: string }) => {
           `https://learningmanagementsystemhw-azc0a4fmgre6cabn.westus3-01.azurewebsites.net/api/CourseProgress/employee/${userStr?.employeeID}`
         )
         if (response.data) {
-          dispatch(addCourses(response.data.data))
-          setCourses(response.data.data)
+          const sortedCourses = response.data.data.sort((a: Course, b: Course) => new Date(b?.lastUpdated).getTime() - new Date(a?.lastUpdated).getTime())
+          dispatch(addCourses(sortedCourses))
+          setCourses(sortedCourses)
         }
       } catch (error) {
         console.error("Error fetching course details:", error)
@@ -197,7 +198,7 @@ const CoursesView = ({ selectedCategory }: { selectedCategory: string }) => {
     } else {
       fetchCourseDetails()
     }
-  }, [dispatch])
+  }, [dispatch, courses])
 
 
 
