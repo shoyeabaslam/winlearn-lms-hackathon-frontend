@@ -12,14 +12,14 @@ import { toast } from 'sonner';
 
 import axiosInstance from '@/lib/axiosInstance';
 import { ToasterProvider } from '@/components/Toaster';
+import { Suspense } from 'react';
 
-export default function LoginPage() {
+const LoginComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [userType, setUserType] = useState<'admin' | 'employee'>('employee');
   const router = useRouter();
-
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get('redirect') || (userType === 'admin' ? '/l&d' : '/employee');
 
@@ -138,5 +138,14 @@ export default function LoginPage() {
         </Card>
       </div>
     </ToasterProvider>
+  );
+}
+
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginComponent />
+    </Suspense>
   );
 }
