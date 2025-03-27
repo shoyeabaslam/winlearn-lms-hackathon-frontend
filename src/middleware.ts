@@ -1,18 +1,20 @@
-import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function middleware(req: NextRequest) {
-    const cookieStore = cookies();
     const url = req.nextUrl;
-    const role = (await cookieStore).get("role")?.value;
+    const role = req.cookies.get("role")?.value;
 
+    // Allow access to the home page
     if (url.pathname === '/') {
         return NextResponse.next();
     }
 
+    // If no role (user not logged in), store the original path and redirect to login
     if (!role) {
-        return NextResponse.redirect(new URL('/', req.url));
+        const loginUrl = new URL('/', req.url);
+        loginUrl.searchParams.set('redirect', url.pathname);
+        return NextResponse.redirect(loginUrl);
     }
 
     // Handle /l&d routes - only Admins can access

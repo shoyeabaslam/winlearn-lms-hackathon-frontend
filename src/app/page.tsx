@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,32 +20,25 @@ export default function LoginPage() {
   const [userType, setUserType] = useState<'admin' | 'employee'>('employee');
   const router = useRouter();
 
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get('redirect') || (userType === 'admin' ? '/l&d' : '/employee');
+
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await axiosInstance.post('https://learningmanagementsystemhw-azc0a4fmgre6cabn.westus3-01.azurewebsites.net/api/Employee/Login', {
-        email,
-        password,
-        userType, // If backend needs this
-      });
+      const response = await axiosInstance.post('https://learningmanagementsystemhw-azc0a4fmgre6cabn.westus3-01.azurewebsites.net/api/Employee/Login', { email, password, userType });
       const { token, employee, isSuccess } = response.data;
+
       if (isSuccess) {
         sessionStorage.setItem('token', token);
         sessionStorage.setItem('user', JSON.stringify(employee));
         document.cookie = `role=${employee.role}; path=/; max-age=86400;`;
-        if (userType === "admin") {
-          if (employee.role?.includes('Admin')) {
-            router.push('/l&d');
-          }
-          else {
-            toast.error('Invalid credentials');
-          }
-        } else {
-          router.push('/employee');
-          toast.success("Login successful!");
-        }
+
+        router.push(redirectPath); // Redirect user to stored path
+        toast.success("Login successful!");
       } else {
         toast.error('Login failed!');
       }
