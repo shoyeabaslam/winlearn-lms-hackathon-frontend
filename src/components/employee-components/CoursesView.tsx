@@ -37,7 +37,7 @@ export const CourseProgressCard = ({ data, setVideoItems }: { data: any, setVide
         lastUpdated: new Date().toISOString(),
         startDate: new Date().toISOString(),
         endDate: null,
-        newOrReUsed: data.newOrReUsed,
+        newOrReUsed: data.newOrReUsed || "Old",
         monthCompleted: null,
       };
 
