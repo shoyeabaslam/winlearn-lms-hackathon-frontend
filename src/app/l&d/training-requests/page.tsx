@@ -104,10 +104,7 @@ const TrainingRequests = () => {
             }
         };
 
-        // Only update if the redux requests array length differs from local state
         fetchRequests();
-        // We omit trainingRequests from dependencies to prevent extra updates.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
 
     const filterRequestsByTabs = (tab: string) => {
