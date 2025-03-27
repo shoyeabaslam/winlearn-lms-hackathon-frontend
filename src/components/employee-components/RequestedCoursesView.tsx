@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import CardSkimmer from "../CardSkimmer"
 import { LoaderCircle } from "lucide-react"
+import Link from "next/link"
 
 interface RequestData {
     requestID: number
@@ -21,6 +22,7 @@ interface RequestData {
         trainingMode: string
         trainingSource: string
     },
+    imageLink: string,
     employeeDetails: any
 }
 
@@ -39,9 +41,6 @@ const statusStyles: Record<Status, string> = {
     [Status.Completed]: "",
     [Status.Approved]: "bg-green-100 text-green-800"
 }
-
-
-
 
 export const RequestCard: React.FC<RequestCardProps> = ({ data, isAdmin = false, handleApprove, handleReject, loadingAction }) => {
     const [expanded, setExpanded] = useState(false)
@@ -153,9 +152,9 @@ export const RequestCard: React.FC<RequestCardProps> = ({ data, isAdmin = false,
                     </div>
                     {isGroupRequest && (
                         <div className="flex space-x-1">
-                            <Button variant="link" className="text-blue-600">
+                            <Link href={data?.imageLink} target="_blank" className="text-blue-600">
                                 View Justification
-                            </Button>
+                            </Link>
                             <div className="border rounded-md border-blue-900">
                                 <Select defaultValue="">
                                     <SelectTrigger className='outline-none border-none'>

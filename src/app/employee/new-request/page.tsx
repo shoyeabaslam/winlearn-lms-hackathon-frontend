@@ -18,6 +18,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
 import { TrainingMode } from '@/lib/trainingMode';
 import { trainingGroup } from '@/lib/trainingGroup';
+import axios from 'axios';
 
 const ReactSelect = dynamic<SelectProps>(() => import('react-select'), { ssr: false });
 
@@ -189,6 +190,10 @@ const TrainingRequestForm = () => {
                     });
                 } else {
                     // Bulk request with multiple participants
+                    const someName = new FormData();
+                    someName.append('file', formData.justificationFile as Blob);
+                    console.log(someName.get('file'))
+                    const result = await axios.post('/api/upload', someName)
                     await axiosInstance.post('https://learningmanagementsystemhw-azc0a4fmgre6cabn.westus3-01.azurewebsites.net/api/CoursesRequest/create', {
                         employeeID: formData.employeeId,
                         courseID: formData.trainingTopic?.value,
@@ -196,8 +201,10 @@ const TrainingRequestForm = () => {
                         requestDate: new Date().toISOString(),
                         status: Status.Pending,
                         comments: formData.otherTrainingTopic || "",
-                        imageLink: formData.justificationFile ? URL.createObjectURL(formData.justificationFile) : ""
+                        imageLink: result?.data?.imageUrl || ""
                     });
+
+
                 }
 
                 toast.success("Training request submitted successfully");
@@ -211,7 +218,7 @@ const TrainingRequestForm = () => {
                     topicName: formData.brownBagPresentationTopic,
                     agenda: formData.brownBagDescription,
                     speakerDescription: formData.brownBagSpeakerWriteUp,
-                    requestDate: new Date().toISOString(),
+                    requestDate: formData.brownBagDate?.toISOString(),
                     status: Status.Pending
                 };
 
