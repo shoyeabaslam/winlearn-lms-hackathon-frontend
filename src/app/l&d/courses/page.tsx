@@ -13,6 +13,8 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { Search, AlertCircle, ExternalLink } from 'lucide-react'
+import { trainingGroup } from '@/lib/trainingGroup'
+import { TrainingMode } from '@/lib/trainingMode'
 
 interface Course {
     courseID: number
@@ -134,13 +136,7 @@ const CoursesPage = () => {
         return matchesSearch && matchesCategory && matchesMode
     }) : []
 
-    const categories = Array.isArray(courses) && courses.length > 0
-        ? [...new Set(courses.map(course => course.category))]
-        : []
 
-    const trainingModes = Array.isArray(courses) && courses.length > 0
-        ? [...new Set(courses.map(course => course.trainingMode))]
-        : []
 
     if (error) {
         return (
@@ -174,7 +170,7 @@ const CoursesPage = () => {
                     </SelectTrigger>
                     <SelectContent className='bg-white'>
                         <SelectItem value="all">All Categories</SelectItem>
-                        {categories.map(category => (
+                        {trainingGroup.map(category => (
                             <SelectItem key={category} value={category}>{category}</SelectItem>
                         ))}
                     </SelectContent>
@@ -186,7 +182,7 @@ const CoursesPage = () => {
                     </SelectTrigger>
                     <SelectContent className='bg-white'>
                         <SelectItem value="all">All Training Modes</SelectItem>
-                        {trainingModes.map(mode => (
+                        {TrainingMode.map(mode => (
                             <SelectItem key={mode} value={mode}>{mode}</SelectItem>
                         ))}
                     </SelectContent>
